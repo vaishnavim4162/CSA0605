@@ -1,0 +1,8 @@
+def checkIsPerfectNumber(num):
+    divisors = sum([i for i in range(1, num) if num % i == 0])
+    return num == divisors
+a = 6
+if checkIsPerfectNumber(a):
+    print(&quot;Number is a Perfect Number.&quot;)
+else:
+    print(&quot;Number is not a Perfect Number.&quot;)
