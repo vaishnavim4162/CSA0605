@@ -1,0 +1,8 @@
+def reverse_string(s,i):
+    if i==len(s):
+        return s[::-1]
+    else:
+        return reverse_string(s,i+1)
+        
+s="hello"
+print(reverse_string(s,0))
