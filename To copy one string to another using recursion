@@ -1,0 +1,9 @@
+def copystr(s1,s2,i):
+    if i==len(s1):
+        return s2
+    else:
+        s2+=s1[i]
+    return copystr(s1,s2,i+1)
+s1="helloworld";
+s2=""
+print(copystr(s1,s2,0))
