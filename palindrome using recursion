@@ -1,0 +1,9 @@
+def palindrome(s,i,j):
+    if i>=j:
+        return True 
+    elif s[i]!=s[j]:
+        return False 
+    else:
+        return palindrome(s,i+1,j-1)
+s="vaishu"
+print(palindrome(s,0,len(s)-1))
