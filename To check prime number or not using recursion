@@ -1,0 +1,9 @@
+def isprime(n, i):
+    if i == 1:
+        return True 
+    elif n % i == 0:
+        return False 
+    else:
+        return isprime(n,i-1)
+n=17
+print(isprime(n,n-1))
