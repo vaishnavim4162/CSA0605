@@ -1,0 +1,27 @@
+def minimize_value(s):
+    res = []
+    count = {}
+    def find_smallest_available_char():
+        for char in 'abcdefghijklmnopqrstuvwxyz':
+            if char not in count or count[char] == 0:
+                return char
+        return '?'  
+    for char in s:
+        if char != '?':
+            res.append(char)
+            if char in count:
+                count[char] += 1
+            else:
+                count[char] = 1
+        else:
+        
+            smallest_char = find_smallest_available_char()
+            res.append(smallest_char)
+            if smallest_char in count:
+                count[smallest_char] += 1
+            else:
+                count[smallest_char] = 1
+    
+    return ''.join(res)
+s = "a?b?c?"
+print(minimize_value(s))  
