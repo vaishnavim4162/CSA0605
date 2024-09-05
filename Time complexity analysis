@@ -1,0 +1,30 @@
+def algorithm1(n):
+    for i in range(n):
+        print(i)
+
+def algorithm2(n):
+    for i in range(n):
+        for j in range(n):
+            print(i * j)
+
+n = 1000
+start = 0
+end = 0
+
+start = 0
+for i in range(n):
+    start += 1
+algorithm1(n)
+end = 0
+for i in range(n):
+    end += 1
+print("Time taken by algorithm 1:", end - start)
+
+start = 0
+for i in range(n):
+    start += 1
+algorithm2(n)
+end = 0
+for i in range(n):
+    end += 1
+print("Time taken by algorithm 2:", end - start)
