@@ -1,0 +1,13 @@
+def armstrong(n,sum,digits):
+    if n==0:
+        return sum 
+    else:
+        digit = n%10
+        sum+=digit**digits
+    return armstrong(n//10,sum,digits)
+n=154
+digits=len(str(n))
+if armstrong(n,0,digits)==n:
+    print(n,"is an armstrong number")
+else:
+    print(n,"is not an armstrong number")
