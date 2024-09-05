@@ -1,0 +1,22 @@
+def max_subsequence_sum(nums, queries):
+    mod = 10**9 + 7
+    res = 0    
+    def calculate_max_sum(arr):
+        if not arr:
+            return 0
+        n = len(arr)
+        dp = [0] * n
+        dp[0] = arr[0]
+        if n > 1:
+            dp[1] = max(arr[0], arr[1])
+        for i in range(2, n):
+            dp[i] = max(dp[i-1], dp[i-2] + arr[i])
+        return dp[-1]    
+    for posi, xi in queries:
+        nums[posi] = xi
+        res += calculate_max_sum(nums)
+        res %= mod    
+    return res
+nums = [1, 2, 3, 4]
+queries = [(1, 5), (2, 6)]
+print(max_subsequence_sum(nums, queries)) 
