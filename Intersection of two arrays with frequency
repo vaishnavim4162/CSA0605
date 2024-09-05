@@ -1,0 +1,16 @@
+def intersection_with_frequency(nums1, nums2):
+    freq1 = {}
+    freq2 = {}
+    for num in nums1:
+        freq1[num] = freq1.get(num, 0) + 1
+    for num in nums2:
+        freq2[num] = freq2.get(num, 0) + 1
+    result = []
+    for num in freq1:
+        if num in freq2:
+            result.extend([num] * min(freq1[num], freq2[num]))
+    return result
+
+nums1 = [1, 2, 2, 1]
+nums2 = [2, 2]
+print("Intersection with frequency:", intersection_with_frequency(nums1, nums2))
