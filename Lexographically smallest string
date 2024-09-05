@@ -1,0 +1,37 @@
+def smallest_string(s, pairs):
+    parent = {}
+    rank = {}    
+    def find(x):
+        if x not in parent:
+            parent[x] = x
+            rank[x] = 0
+        if parent[x] != x:
+            parent[x] = find(parent[x])
+        return parent[x]  
+    def union(x, y):
+        root_x = find(x)
+        root_y = find(y)
+        if root_x != root_y:
+            if rank[root_x] > rank[root_y]:
+                parent[root_y] = root_x
+            else:
+                parent[root_x] = root_y
+                if rank[root_x] == rank[root_y]:
+                    rank[root_y] += 1
+    for x, y in pairs:
+        union(x, y)  
+    groups = {}
+    for i in range(len(s)):
+        group = find(i)
+        if group not in groups:
+            groups[group] = []
+        groups[group].append(i)   
+    res = [''] * len(s)
+    for group in groups:
+        chars = sorted([s[i] for i in groups[group]])
+        for i, char in zip(groups[group], chars):
+            res[i] = char    
+    return ''.join(res)
+s = "dcab"
+pairs = [(0, 3), (1, 2)]
+print(smallest_string(s, pairs))
