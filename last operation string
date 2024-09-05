@@ -1,0 +1,20 @@
+def remove_first_occurrence(s, char):
+    new_s = ''
+    found = False
+    for c in s:
+        if c == char and not found:
+            found = True
+        else:
+            new_s += c
+    return new_s
+def last_nonempty_string(s):
+    previous_s = s
+    while s:
+        for char in range(ord('a'), ord('z') + 1):
+            s = remove_first_occurrence(s, chr(char))
+        if s:
+            previous_s = s
+    return previous_s
+s = "aabcbbca"
+result = last_nonempty_string(s)
+print(result) 
