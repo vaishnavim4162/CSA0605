@@ -1,0 +1,22 @@
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+head = ListNode(4, ListNode(2, ListNode(1, ListNode(3))))
+
+sorted_head = ListNode(0)
+while head:
+    node = head
+    head = head.next
+    prev, curr = sorted_head, sorted_head.next
+    while curr and curr.val < node.val:
+        prev, curr = curr, curr.next
+    node.next, prev.next = curr, node
+
+result = []
+while sorted_head.next:
+    result.append(sorted_head.next.val)
+    sorted_head = sorted_head.next
+
+print(result)
