@@ -1,0 +1,11 @@
+arr = [4, 3, 2, 1, 0]
+
+max_chunk = 0
+max_element = -1
+
+for i in range(len(arr)):
+    max_element = max(max_element, arr[i])
+    if max_element == i:
+        max_chunk += 1
+
+print(max_chunk)
