@@ -1,0 +1,21 @@
+def countAndSay(n):
+    if n == 1:
+        return "1"
+    
+    prev_term = countAndSay(n - 1)
+    result = []
+    count = 1
+    
+    for i in range(1, len(prev_term)):
+        if prev_term[i] == prev_term[i - 1]:
+            count += 1
+        else:
+            result.append(str(count) + prev_term[i - 1])
+            count = 1
+    
+    result.append(str(count) + prev_term[-1])
+    
+    return ''.join(result)
+
+print(countAndSay(1)) 
+print(countAndSay(4))  
