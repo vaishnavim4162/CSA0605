@@ -1,0 +1,44 @@
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def sortedArrayToBST(nums):
+    if not nums:
+        return None
+
+    mid = len(nums) // 2
+    root = TreeNode(nums[mid])
+    
+    root.left = sortedArrayToBST(nums[:mid])
+    root.right = sortedArrayToBST(nums[mid+1:])
+    
+    return root
+
+
+def print_level_order(root):
+    if not root:
+        return []
+    
+    result, current_level = [], [root]
+    while current_level:
+        next_level, values = [], []
+        for node in current_level:
+            if node:
+                values.append(node.val)
+                next_level.append(node.left)
+                next_level.append(node.right)
+            else:
+                values.append(None)
+        if any(val is not None for val in values):
+            result.extend(values)
+        current_level = next_level
+    
+    return result
+
+nums = [-10, -3, 0, 5, 9]
+
+bst_root = sortedArrayToBST(nums)
+
+print(print_level_order(bst_root))
