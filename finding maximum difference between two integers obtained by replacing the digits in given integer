@@ -1,0 +1,32 @@
+def maxDifference(num):
+    num_str = str(num)
+    max_diff = 0
+
+    for x in range(10):
+        for y in range(10):
+            if x == y:
+                continue
+            
+            # Create number a
+            a_str = num_str.replace(str(x), str(y))
+            if a_str[0] == '0':
+                continue
+            a = int(a_str)
+            
+            for z in range(10):
+                for w in range(10):
+                    if z == w:
+                        continue
+                    
+                    # Create number b
+                    b_str = num_str.replace(str(z), str(w))
+                    if b_str[0] == '0':
+                        continue
+                    b = int(b_str)
+                    
+                    max_diff = max(max_diff, abs(a - b))
+
+    return max_diff
+
+
+print(maxDifference(555))  
