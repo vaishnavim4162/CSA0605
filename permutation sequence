@@ -1,0 +1,18 @@
+def getPermutation(n, k):
+    from math import factorial
+
+    numbers = list(range(1, n + 1))
+    k -= 1
+    result = []
+
+    for i in range(n):
+        fact = factorial(n - 1 - i)
+        index = k // fact
+        result.append(numbers.pop(index))
+        k %= fact
+
+    return ''.join(map(str, result))
+
+print(getPermutation(3, 3))
+print(getPermutation(4, 9))
+print(getPermutation(3, 1))
