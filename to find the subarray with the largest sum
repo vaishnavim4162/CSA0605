@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int main() {
+    int nums[] = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
+    int size = sizeof(nums) / sizeof(nums[0]);
+
+    int max_current = nums[0];
+    int max_global = nums[0];
+
+    for (int i = 1; i < size; i++) {
+        if (nums[i] > max_current + nums[i]) {
+            max_current = nums[i];
+        } else {
+            max_current = max_current + nums[i];
+        }
+
+        if (max_current > max_global) {
+            max_global = max_current;
+        }
+    }
+
+    printf("The maximum subarray sum is: %d\n", max_global);
+
+    return 0;
+}
+
+
