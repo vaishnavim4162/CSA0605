@@ -1,0 +1,24 @@
+INF = float('inf')
+n = 5
+dist = [
+    [0, 2, INF, INF, 8],
+    [2, 0, 3, INF, 2],
+    [INF, 3, 0, 1, INF],
+    [INF, INF, 1, 0, 1],
+    [8, 2, INF, 1, 0]
+]
+
+print("Distance matrix before Floyd's Algorithm:")
+for row in dist:
+    print(row)
+
+for k in range(n):
+    for i in range(n):
+        for j in range(n):
+            dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])
+
+print("\nDistance matrix after Floyd's Algorithm:")
+for row in dist:
+    print(row)
+
+print("\nShortest path from City 2 to City 0:", dist[2][0])
