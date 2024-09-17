@@ -1,0 +1,25 @@
+ def numWaysToWearDifferentHats(hats):
+    MOD = 10**9 + 7
+    N = len(hats)
+    
+    hat_to_person = [0] * 41
+    
+    for person, preferences in enumerate(hats):
+        for hat in preferences:
+            hat_to_person[hat] |= (1 << person)
+    
+    dp = [0] * (1 << N)
+    dp[0] = 1
+    
+    for hat in range(1, 41):
+        mask = hat_to_person[hat]
+        for current_mask in range((1 << N) - 1, -1, -1):
+            if dp[current_mask] > 0:
+                new_mask = current_mask | mask
+                dp[new_mask] = (dp[new_mask] + dp[current_mask]) % MOD
+    
+    return dp[(1 << N) - 1]
+
+
+print(numWaysToWearDifferentHats([[3,4],[4,5],[5]]))  
+print(numWaysToWearDifferentHats([[3,5,1],[3,5]]))
