@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+
+int main() {
+    char s1[] = "abc";
+    char s2[] = "xya";
+    int n = strlen(s1);
+    bool s1BreaksS2 = true;
+    bool s2BreaksS1 = true;
+
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (s1[i] > s1[j]) {
+                char temp = s1[i];
+                s1[i] = s1[j];
+                s1[j] = temp;
+            }
+        }
+    }
+
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (s2[i] > s2[j]) {
+                char temp = s2[i];
+                s2[i] = s2[j];
+                s2[j] = temp;
+            }
+        }
+    }
+
+    for (int i = 0; i < n; i++) {
+        if (s1[i] < s2[i]) {
+            s1BreaksS2 = false;
+            break;
+        }
+    }
+
+    for (int i = 0; i < n; i++) {
+        if (s2[i] < s1[i]) {
+            s2
