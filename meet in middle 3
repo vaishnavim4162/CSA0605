@@ -1,0 +1,30 @@
+m = 2
+n = 2
+N = 2
+start_i = 0
+start_j = 0
+
+directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+
+dp = [[[[0] * n for _ in range(m)] for _ in range(N + 1)] for _ in range(4)]
+dp[0][start_i][start_j] = 1
+
+for step in range(N):
+    new_dp = [[[[0] * n for _ in range(m)] for _ in range(N + 1)] for _ in range(4)]
+    for x in range(m):
+        for y in range(n):
+            for direction in directions:
+                new_x, new_y = x + direction[0], y + direction[1]
+                if 0 <= new_x < m and 0 <= new_y < n:
+                    new_dp[step + 1][new_x][new_y] += dp[step][x][y]
+                else:
+                    new_dp[step + 1][x][y] += dp[step][x][y]
+    
+    dp = new_dp
+
+total_ways = 0
+for x in range(m):
+    for y in range(n):
+        total_ways += dp[N][x][y]
+
+print(total_ways)
