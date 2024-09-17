@@ -1,0 +1,19 @@
+def generate_subsets(S):
+    S.sort()
+    subsets = []
+    n = len(S)
+    
+    def backtrack(start, path):
+        subsets.append(path[:])
+        for i in range(start, n):
+            if i > start and S[i] == S[i - 1]:
+                continue
+            path.append(S[i])
+            backtrack(i + 1, path)
+            path.pop()
+    
+    backtrack(0, [])
+    return subsets
+
+A = [1, 2, 3]
+print(generate_subsets(A))
