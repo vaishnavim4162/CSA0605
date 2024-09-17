@@ -1,0 +1,28 @@
+def generate_subset_sums(arr):
+    subset_sums = {0}
+    for num in arr:
+        new_sums = set()
+        for s in subset_sums:
+            new_sums.add(s + num)
+        subset_sums.update(new_sums)
+    return subset_sums
+
+def meet_in_the_middle(arr, target):
+    n = len(arr)
+    mid = n // 2
+    
+    left_part = arr[:mid]
+    right_part = arr[mid:]
+    
+    left_sums = generate_subset_sums(left_part)
+    right_sums = generate_subset_sums(right_part)
+    
+    for s in left_sums:
+        if (target - s) in right_sums:
+            return True
+    
+    return False
+
+arr = [3, 34, 4, 12, 5, 2]
+target = 9
+print("Subset with sum", target, "exists:", meet_in_the_middle(arr, target))
