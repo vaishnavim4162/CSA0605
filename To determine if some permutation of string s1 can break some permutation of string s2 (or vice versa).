@@ -1,0 +1,11 @@
+def canBreak(s1, s2):
+    def checkBreak(s1, s2):
+        return all(x >= y for x, y in zip(s1, s2))
+
+    s1_sorted = sorted(s1)
+    s2_sorted = sorted(s2)
+    
+    return checkBreak(s1_sorted, s2_sorted) or checkBreak(s2_sorted, s1_sorted)
+
+
+print(canBreak("abc", "xya")) 
