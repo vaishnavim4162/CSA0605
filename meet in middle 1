@@ -1,0 +1,46 @@
+set_a = [45, 34, 4, 12, 5, 2]
+target_a = 42
+
+set_b = [1, 3, 2, 7, 4, 6]
+target_b = 10
+
+E = set_a
+target = target_a
+
+mid = len(E) // 2
+left_part = E[:mid]
+right_part = E[mid:]
+
+def generate_subset_sums(arr):
+    n = len(arr)
+    subset_sums = []
+    for i in range(1 << n):
+        sum_subset = 0
+        for j in range(n):
+            if i & (1 << j):
+                sum_subset += arr[j]
+        subset_sums.append(sum_subset)
+    return sorted(subset_sums)
+
+left_sums = generate_subset_sums(left_part)
+right_sums = generate_subset_sums(right_part)
+
+closest_sum = float('inf')
+n_right_sums = len(right_sums)
+
+for left_sum in left_sums:
+    low, high = 0, n_right_sums - 1
+    while low <= high:
+        mid = (low + high) // 2
+        current_sum = left_sum + right_sums[mid]
+        if current_sum == target:
+            closest_sum = target
+            break
+        if current_sum < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+        if abs(current_sum - target) < abs(closest_sum - target):
+            closest_sum = current_sum
+
+print("Closest subset sum to target:", closest_sum)
