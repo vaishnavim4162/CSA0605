@@ -1,0 +1,13 @@
+def findDestinationCity(paths):
+    outgoing_cities = set()
+    
+    for start, end in paths:
+        outgoing_cities.add(start)
+    
+    for _, end in paths:
+        if end not in outgoing_cities:
+            return end
+
+
+print(findDestinationCity([["London","New York"],["New York","Lima"],["Lima","Sao Paulo"]]))  
+print(findDestinationCity([["B","C"],["D","B"],["C","A"]]))  
