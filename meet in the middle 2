@@ -1,0 +1,43 @@
+def generate_subset_sums(arr):
+    n = len(arr)
+    subset_sums = set()
+    for i in range(1 << n):
+        sum_subset = 0
+        for j in range(n):
+            if i & (1 << j):
+                sum_subset += arr[j]
+        subset_sums.add(sum_subset)
+    return subset_sums
+
+def has_subset_with_sum(arr, exact_sum):
+    mid = len(arr) // 2
+    left_part = arr[:mid]
+    right_part = arr[mid:]
+
+    left_sums = generate_subset_sums(left_part)
+    right_sums = generate_subset_sums(right_part)
+    
+    right_sums_list = list(right_sums)
+    right_sums_list.sort()
+    
+    for left_sum in left_sums:
+        low, high = 0, len(right_sums_list) - 1
+        while low <= high:
+            mid = (low + high) // 2
+            current_sum = left_sum + right_sums_list[mid]
+            if current_sum == exact_sum:
+                return True
+            elif current_sum < exact_sum:
+                low = mid + 1
+            else:
+                high = mid - 1
+
+    return False
+
+E1 = [1, 3, 9, 2, 7, 12]
+exact_sum1 = 15
+print(has_subset_with_sum(E1, exact_sum1))
+
+E2 = [3, 34, 4, 12, 5, 2]
+exact_sum2 = 15
+print(has_subset_with_sum(E2, exact_sum2))
