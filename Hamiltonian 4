@@ -1,0 +1,17 @@
+def subsets_with_element(E, x):
+    subsets = []
+    n = len(E)
+    def backtrack(start, path):
+        if x in path:
+            subsets.append(path[:])
+        for i in range(start, n):
+            path.append(E[i])
+            backtrack(i + 1, path)
+            path.pop()
+    
+    backtrack(0, [])
+    return subsets
+E = [2, 3, 4, 5]
+x = 3
+result = subsets_with_element(E, x)
+print(result)
